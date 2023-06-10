@@ -7,10 +7,7 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { CustomerComponent } from './customer/customer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-import { HttpErrorHandler } from './services/http-error-handler.service';
-import { MessageService } from './services/message.service';
-import { MessageComponent } from './message/message.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +15,7 @@ import { MessageComponent } from './message/message.component';
     AdminComponent,
     CustomerComponent,
     PageNotFoundComponent,
-    MessageComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +23,6 @@ import { MessageComponent } from './message/message.component';
     HttpClientModule
   ],
   providers: [
-    HttpErrorHandler,
-    MessageService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../services/admin.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-admin',
@@ -8,20 +9,20 @@ import { AdminService } from '../services/admin.service';
 })
 export class AdminComponent implements OnInit {
 
-admin:any;
+  public admin:any;
 
-  constructor(private adminService:AdminService) { }
+  constructor(private httpClient:HttpClient) { }
 
   ngOnInit(): void {
     this.getAdmin();
   }
 
   getAdmin() {
-    this.adminService.getAdmin().subscribe(
-      result => {
-        this.admin = result;
-      },
-      err => console.log(err)
+    this.httpClient.get<any>(environment.apiUrl+"/api/admin").subscribe(
+      response=>{
+        console.log(response);
+        this.admin=response;
+      }
     )
   }
 
