@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<div *ngIf="admin">
+    <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+    <app-admin [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-admin>
+</div>
+<div *ngIf="!admin">
+<h1>Customer</h1>
+</div>

@@ -1,0 +1,30 @@
+<p>home</p>
+<div class="card">
+    <div class="card-head">
+        Add Slots
+    </div>
+    <div class="card-body">
+        //Reactive form
+        <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+            <!-- name, date, time_slots_available, car_type, price, number_of_slots -->
+
+            <label for="name">Name: </label>
+            <input id="name" type="text" formControlName="Name">
+
+            <label for="date">Date: </label>
+            <input formControlName="date" id="date" type="date" />
+            <!-- <br/>{{adminForm.value.date | date: 'yyyy/MM/dd' }}  -->
+
+            <!-- //multiselectDropdown (2) -->
+            <!-- <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [settings]="dropdownSettings" [data]="dropdownList"
+                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown> -->
+
+            <!-- 2 integer fields -->
+
+
+            <button type="submit" [disabled]="!adminForm.valid">Submit</button>
+            <button type="button" (click)="updateProfile()">Update Profile</button>
+        </form>
+    </div>
+</div>
