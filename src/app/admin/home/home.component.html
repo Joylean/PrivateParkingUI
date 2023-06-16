@@ -1,13 +1,16 @@
 <div class="card">
-    <div class="card-head">
+    <div *ngIf="!updateSlot" class="card-head">
         <h3>Add Slots</h3>
+    </div>
+    <div *ngIf="updateSlot" class="card-head">
+        <h3>Update Slot</h3>
     </div>
     <div class="card-body">
         <!-- //Reactive form -->
             <div class="row">
                 <div class="col col-md-6 formstyle" style="overflow-y: scroll; max-height: 100vh">
                     <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
-                        <!-- name, date, time_slots_available, car_type, price, number_of_slots -->
+                        <!-- name, date, time_slots_available, car_type, price, number_of_slots, cancel -->
                     <!-- name -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Name *</label><br/>
@@ -20,7 +23,7 @@
                     <!-- date -->
                     <div class="mb-3">
                         <label for="date">Date *</label><br/>
-                        <input formControlName="date" id="date" type="date" class="form-control" placeholder="Add Date"/>
+                        <input formControlName="date" id="date" type="date" class="form-control" [(ngModel)]="dateNew" placeholder="Add Date"/>
                         <div *ngIf="adminForm.controls['date'].invalid && (adminForm.controls['date'].dirty || adminForm.controls['date'].touched)" class="alert alert-danger">
                             <div *ngIf="adminForm.controls['date'].errors?.['invalidDate']">You cannot choose a past date</div>
                         </div>
@@ -78,9 +81,11 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="mb-3">
+                    <div *ngIf="!updateSlot" class="mb-3">
                         <button type="submit" [disabled]="!adminForm.valid" class="btn btn-primary">Submit</button>&nbsp;
-                        <button type="button" (click)="updateProfile()" class="btn btn-primary">Update Profile</button>
+                    </div>
+                    <div *ngIf="updateSlot" class="mb-3">
+                        <button type="button" (click)="onUpdate()" class="btn btn-primary">Update</button>
                     </div>
                     </form>
                 </div>

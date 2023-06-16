@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Admin } from 'app/models/admin.model';
+import { AdminService } from 'app/services/admin.service';
+import { ToastrService } from 'ngx-toastr';
 import timeslot from './time_slot.json';
 import cartype from './car_type.json';
 
@@ -10,6 +13,8 @@ import cartype from './car_type.json';
 })
 export class HomeComponent implements OnInit {
 
+  @Output() onSendBack=new EventEmitter<boolean>();
+  @Input() dataSend: any;
   adminForm!: FormGroup;
 
   //multiselect dropdown
@@ -19,12 +24,67 @@ export class HomeComponent implements OnInit {
   dropdownListCars: any[] = [];
   selectedCars: any[] = [];
   dropdownSettingsCar: any = {};
+  dateNew:any;
 
-  constructor(private fb: FormBuilder) { }
+  addAdminData: Admin = {
+    admin_name: "",
+    slot_date: new Date(),
+    time_slots_available: {},
+    car_type: {},
+    price: 0,
+    number_of_slots: 0,
+    cancellation_fee: 0
+  }
+  updateSlot: boolean=false;
+  // addAdminData:any={
+  //   "admin_name":"",
+  //   "slot_date":"",
+  //   "time_slots_available":{},
+  //   "car_type":{},
+  //   "price":0,
+  //   "number_of_slots":0,
+  //   "cancellation_fee":0
+  // };
+
+  constructor(
+    private fb: FormBuilder,
+    private adminservice: AdminService,
+    private toastr: ToastrService
+     ) { }
 
   ngOnInit(): void {
     this.initForm();
-    console.log(timeslot, cartype);
+
+    //updateAdminData part
+    if(this.dataSend){
+      this.updateSlot=true;
+      //date conversion
+      const newdate = new Date(this.dataSend.slot_date);
+      let month = '' + (newdate.getMonth() + 1);
+      let day = '' + newdate.getDate();
+      const year = newdate.getFullYear();
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      const simpleDate=[year, month, day].join('-');
+      // console.log(simpleDate);
+
+      //Prefilling fields
+      this.adminForm.patchValue({
+        name: this.dataSend.admin_name,
+        date: simpleDate,
+        time_slots_available: this.dataSend.time_slots_available["data"],
+        car_type: this.dataSend.car_type["data"],
+        price: this.dataSend.price,
+        number_of_slots: this.dataSend.number_of_slots,
+        cancel: this.dataSend.cancellation_fee,
+      })
+      this.selectedItems=this.dataSend.time_slots_available["data"];
+      this.selectedCars=this.dataSend.car_type["data"];
+      this.dateNew=simpleDate;
+      // console.log(this.adminForm.value);
+      // this.adminForm.controls['name'].disable(); //disabling name field
+    }
+
     this.dropdownList = timeslot;
     this.dropdownListCars = cartype;
     this.dropdownSettings = {
@@ -74,16 +134,35 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
+    // name, date, time_slots_available, car_type, price, number_of_slots, cancel
     // TODO: Use EventEmitter with form value
-    console.log("working");
-    console.warn(this.adminForm.value);
+    this.submitUpdateAdminForm();
+    this.adminservice.addAdminDetails(this.addAdminData).subscribe({
+    next: (admin) => {
+      this.toastr.success('Successfully added the slot !', 'Success!');
+      // location.reload();
+    },
+    error: (response) => {
+      console.log(response);
+    }
+   });
   }
 
-  updateProfile() {
-    this.adminForm.patchValue({
-      Name: 'Nancy Drew',
-      date: ''
-    });
+  onUpdate() {
+    this.submitUpdateAdminForm();
+    // console.log(this.dataSend.id,this.addAdminData);
+    this.adminservice.updateAdminDetails(this.dataSend.id,this.addAdminData).subscribe({
+      next: (admin) => {
+        this.toastr.success('Successfully added the slot !', 'Success!');
+        setTimeout(()=>{
+          this.onSendBack.emit(true);
+        }, 3000);
+        // location.reload();
+      },
+      error: (response) => {
+        console.log(response);
+      }
+     });
   }
 
   dateValidator(control: AbstractControl){ 
@@ -99,7 +178,7 @@ export class HomeComponent implements OnInit {
     if (day.length < 2) day = '0' + day;
     const today=[year, month, day].join('-');
   
-      console.log(selected, today);
+      // console.log(selected, today);
       if(!(control && selected)) {
         // if there's no control or no value, that's ok
         return null;
@@ -111,5 +190,17 @@ export class HomeComponent implements OnInit {
         : {invalidDate: 'You cannot use past dates' } ;
     }
     return null;
+  }
+
+  submitUpdateAdminForm(){
+    // console.warn(this.adminForm.value);
+    this.addAdminData.admin_name=this.adminForm.value.name;
+    this.addAdminData.slot_date=this.adminForm.value.date;
+    this.addAdminData.time_slots_available={"data":this.adminForm.value.time_slots_available};
+    this.addAdminData.car_type={"data":this.adminForm.value.car_type};
+    this.addAdminData.price=this.adminForm.value.price;
+    this.addAdminData.number_of_slots=this.adminForm.value.number_of_slots;
+    this.addAdminData.cancellation_fee=this.adminForm.value.cancel;
+    // console.log(this.addAdminData);
   }
 }
