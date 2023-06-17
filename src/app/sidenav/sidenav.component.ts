@@ -1,8 +1,13 @@
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { animate, style, transition, trigger, keyframes } from '@angular/animations';
 // import { keyframes } from '@mui/material';
 
 interface SideNavToggle {
+  screenWidth: number;
+  collapsed: boolean;
+}
+
+interface SideNavToggleCust {
   screenWidth: number;
   collapsed: boolean;
 }
@@ -34,8 +39,9 @@ interface SideNavToggle {
   ]
 })
 export class SidenavComponent implements OnInit {
-
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+  @Output() onToggleSideNavCustomer: EventEmitter<SideNavToggleCust> = new EventEmitter();
+  @Input() adminData: any;
   @HostListener('window:resize',['$event'])
   collapsed = false;
   screenWidth = 0;
@@ -57,6 +63,19 @@ export class SidenavComponent implements OnInit {
     },
   ];
 
+  navCustData = [
+    {
+      routeLink:'customer',
+      icon:'fal fa-home',
+      label:'Home'
+    },
+    {
+      routeLink:'booked_slots',
+      icon:'fal fa-tasks',
+      label:'Booking status'
+    },
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
@@ -67,19 +86,31 @@ export class SidenavComponent implements OnInit {
     this.screenWidth=window.innerWidth;
     if(this.screenWidth<=768){
       this.collapsed=false;
-      this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+      if(this.adminData){
+        this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+      }else{
+        this.onToggleSideNavCustomer.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+      }
     }
   }
 
 
   toggleCollapse(): void{
     this.collapsed=!this.collapsed;
-    this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+    if(this.adminData){
+      this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+    }else{
+      this.onToggleSideNavCustomer.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+    }
   }
 
   closeSideNav(): void{
     this.collapsed=false;
-    this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+    if(this.adminData){
+      this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+    }else{
+      this.onToggleSideNavCustomer.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+    }  
   }
 
 }

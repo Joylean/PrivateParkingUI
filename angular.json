@@ -62,10 +62,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "PrivateParkingUI:build",
-            "proxyConfig": "src/proxy.conf.json"
-          },
           "configurations": {
             "production": {
               "browserTarget": "PrivateParkingUI:build:production"

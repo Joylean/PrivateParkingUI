@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminMain } from 'app/models/adminMain.model';
 import { AdminService } from 'app/services/admin.service';
-import { Admin } from 'mongodb';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -43,20 +42,20 @@ export class ManageReservationsComponent implements OnInit {
   get_Admin(){
     this.myadminData.splice(0);
     this.adminService.getAllAdminDetails().subscribe({
-    next: (adminDetails) => {
-      this.getData=adminDetails;
-      // console.log(this.getData);
-      for (var k in adminDetails) {
-        this.allAdmins =adminDetails[k];
-        if(this.allAdmins.admin_name===this.myName && this.allAdmins.admin_name!==""){
-          this.myadminData.push(adminDetails[k]);
+      next: (adminDetails) => {
+        this.getData = adminDetails;
+        // console.log(this.getData);
+        for (var k in adminDetails) {
+          this.allAdmins = adminDetails[k];
+          if (this.allAdmins.admin_name === this.myName && this.allAdmins.admin_name !== "") {
+            this.myadminData.push(adminDetails[k]);
+          }
         }
+      },
+      error: (response) => {
+        console.log(response);
       }
-    },
-    error: (response) => {
-      console.log(response);
-    }
-  })
+    })
   }
 
   updateAdminData(adde:any){

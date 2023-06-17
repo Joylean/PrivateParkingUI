@@ -1,7 +1,8 @@
 <div *ngIf="admin">
-    <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+    <app-sidenav (onToggleSideNav)="onToggleSideNav($event)" [adminData]="admin"></app-sidenav>
     <app-admin [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-admin>
 </div>
 <div *ngIf="!admin">
-<h1>Customer</h1>
+    <app-sidenav (onToggleSideNavCustomer)="onToggleSideNavCust($event)" [adminData]="admin"></app-sidenav>
+    <app-customer [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-customer>
 </div>

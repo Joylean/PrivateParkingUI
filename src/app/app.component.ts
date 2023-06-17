@@ -5,6 +5,11 @@ interface SideNavToggle {
   collapsed: boolean;
 }
 
+interface SideNavToggleCust{
+  screenWidth: number;
+  collapsed: boolean;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,12 +17,17 @@ interface SideNavToggle {
 })
 export class AppComponent {
   title = 'PrivateParkingUI';
-  admin = true;
+  admin:Boolean = false; //change this value to open admin page and customer page
 
   isSideNavCollapsed=false;
   screenWidth=0;
 
   onToggleSideNav(data:SideNavToggle):void{
+    this.screenWidth=data.screenWidth;
+    this.isSideNavCollapsed=data.collapsed;
+  }
+
+  onToggleSideNavCust(data:SideNavToggleCust):void{
     this.screenWidth=data.screenWidth;
     this.isSideNavCollapsed=data.collapsed;
   }

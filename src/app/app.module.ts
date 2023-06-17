@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ToastrModule } from 'ngx-toastr';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -15,6 +17,9 @@ import { HomeComponent } from './admin/home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ManageCustomersComponent } from './admin/manage-customers/manage-customers.component';
 import { ManageReservationsComponent } from './admin/manage-reservations/manage-reservations.component';
+import { CustomerHomeComponent } from './customer/customer-home/customer-home.component';
+import { ManageBookedSlotsComponent } from './customer/manage-booked-slots/manage-booked-slots.component';
+import { CustomerHomeChildComponent } from './customer/customer-home-child/customer-home-child.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,9 @@ import { ManageReservationsComponent } from './admin/manage-reservations/manage-
     SidenavComponent,
     ManageCustomersComponent,
     ManageReservationsComponent,
+    CustomerHomeComponent,
+    ManageBookedSlotsComponent,
+    CustomerHomeChildComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,12 +41,14 @@ import { ManageReservationsComponent } from './admin/manage-reservations/manage-
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
     NgMultiSelectDropDownModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-    })
+    }),
   ],
   providers: [
   ],

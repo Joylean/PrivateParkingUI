@@ -1,0 +1,74 @@
+<!-- customer sees all available slots here in a table or cards -->
+
+<!-- <div *ngFor="let adde of objectvalues(myadminData);let i=index" class="card">
+
+    <div class="card-head">
+        <span class="headingStyle"> 
+            Slot {{i+1}} Details
+        </span> 
+    </div>
+    <div *ngFor="let dat of objectkeys(adde);let in=index">
+        <div *ngIf="dat!=='time_slots_available'">
+            <div *ngIf="dat!=='car_type'">
+                <div *ngIf="dat!=='slot_date'">
+                    <div *ngIf="dat!=='id'" class="row contentStyle">
+                        <strong>{{dat.replace('_', ' ') | titlecase }} :</strong> {{adde[dat]}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="dat ==='time_slots_available'" class="row contentStyle">
+            <strong>{{dat.replace('_', ' ') | titlecase}} :</strong><br/>
+            <span *ngFor="let val of objectvalues(adde[dat])">
+                <span *ngFor="let details of objectvalues(val)">
+                    <span *ngFor="let detail of objectvalues(details);let idx=index" >
+                        <span *ngIf="idx===1">
+                            {{detail}}<br/>
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </div>
+        <div *ngIf="dat ==='car_type'" class="row contentStyle">
+            <strong>{{dat.replace('_', ' ') | titlecase}} :</strong><br/>
+            <span *ngFor="let val of objectvalues(adde[dat])">
+                <span *ngFor="let details of objectvalues(val);">
+                    <span *ngFor="let detail of objectvalues(details);let idx=index" >
+                        <span *ngIf="idx===1">
+                            {{detail}}<br/>
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </div>
+        <div *ngIf="dat ==='slot_date'" class="row contentStyle">
+            <strong>{{dat.replace('_', ' ') | titlecase}} :</strong> {{adde[dat] | date: 'yyyy-MM-dd'}}
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-link btnStyle" (click)="updateAdminData(adde)" title="Edit admin details"><i class="fal fa-edit"></i></button>
+        <button class="btn btn-link btnStyle1" (click)="deleteAdminData(adde)" title="Delete admin details"><i class="fal fa-trash"></i></button>
+    </div>
+</div> -->
+
+<!-- <div class="mat-elevation-z8 cardtable">
+    <h5 class="text1">Slots available</h5>
+    <table mat-table [dataSource]="dataSource">
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-mini-fab color="primary" (click)="Book(element)" aria-label="Example icon button with a delete icon">
+                    <i class="fal fa-cog"></i>
+                </button>&nbsp;
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+        <tr (click)="getrow(row)" mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5,10,15,20]">
+    </mat-paginator>
+</div> -->
