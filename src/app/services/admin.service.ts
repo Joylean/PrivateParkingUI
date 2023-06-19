@@ -40,61 +40,7 @@ export class AdminService {
     return this.http.put<Admin[]>(this.baseApiUrl+'/api/admin/'+id,updateAdminDetails);
   }
 
-  deleteAdmin(id: number):Observable<Admin[]> {
-    return this.http.delete<Admin[]>(this.baseApiUrl+'/api/admin/'+id);
+  deleteAdmin(id: number):Observable<AdminMain[]> {
+    return this.http.delete<AdminMain[]>(this.baseApiUrl+'/api/admin/'+id);
   }
-
-
-  //in component
-  // this.service.addAdminDetails(this.addEmployee).subscribe({
-  //   next: (employee) => {
-  //     location.reload();
-  //   },
-  //   error: (response) => {
-  //     console.log(response);
-  //   }
-  // });
-
-
-  // this.deptservice.getAllDepartments().subscribe({
-  //   next: (departments) => {
-  //     this.deptData=departments;
-  //     for (var k in this.deptData[0]) {
-  //       this.displayedDeptColumns.push(k);
-  //     }
-  //     this.dataDeptSource=new MatTableDataSource(this.deptData);
-  //     this.dataDeptSource.paginator=this.paginator;
-  //     this.dataDeptSource.sort=this.sort;
-  //   },
-  //   error: (response) => {
-  //     console.log(response);
-  //   }
-  // })
-
-  // var id=row.id;
-  //   this.service.getEmployee(id).subscribe({
-  //     next: (employee:any) => {
-  //       this.buttonAddUpdate=true;
-  //       //open modal
-  //       this.sendData=employee[0];
-  //       this.displayStyle = "block";
-  //       //Change all data to that of Update
-  //       this.title='Update Employee Details';
-  //       this.titleButton='Update';
-  //     },
-  //     error: (response) => {
-  //       console.log(response);
-  //     }
-  //   });
-
-
-  // this.service.deleteEmployee(newId).subscribe({
-  //   next: () =>{
-  //     console.log("Deleted Successfully");
-  //     location.reload();
-  //   },
-  //   error: (response) => {
-  //     console.log(response);
-  //   }
-  // })
 }

@@ -1,10 +1,69 @@
 .text1 {
     font-size: 25px;
 }
-.cardtable {
-    padding: 20px;
+
+.cardtableHeading {
+    padding: 20px 20px 0 20px;
+    color: darkcyan;
+}
+
+.para{
+    font-size:x-small;
+}
+
+.cardtablesubheading{
+    padding: 0 20px 0 20px;
+}
+
+.btnStyle{
+    background-color: darkcyan;
+    color: aliceblue;
+}
+
+.btnStyle1{
+    float: right;
+    color: darkcyan;
 }
 
 table {
     width: 100%;
-  }
+    overflow: auto;
+    display: table-cell;
+}
+
+td {
+    padding: 20px 0;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: darkcyan !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: darkcyan !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: darkcyan !important;
+}
+@media screen and (min-width: 740px) {
+    .mat-cell,
+    .mat-header-cell {
+        overflow: hidden;
+        padding-right: 10px;
+    }
+}
+
+@media screen and (max-width: 739px) {
+    .tableStyle{
+        overflow: scroll;
+    }
+
+    .mat-cell,
+    .mat-header-cell {
+        padding-right: 10px;
+    }
+}

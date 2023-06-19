@@ -1,0 +1,6 @@
+[
+    { "item_id": 1, "item_text": "Booked" },
+    { "item_id": 2, "item_text": "CheckIn" },
+    { "item_id": 3, "item_text": "CheckOut" },
+    { "item_id": 4, "item_text": "Cancel" }
+]

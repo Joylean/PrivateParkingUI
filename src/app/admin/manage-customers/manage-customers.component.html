@@ -1,1 +1,30 @@
-<p>manage-customers works!</p>
+<app-customer-home-child *ngIf="UpdateButtonClicked" [dataSentToUpdateCustomerForm]="sendCustData" (onSendBack)="success($event)"></app-customer-home-child>
+
+<div *ngFor="let booked of objectvalues(myBookedDetails);let i=index" class="card">
+    <div class="card-head">
+        <span class="headingStyle"> 
+            Booked slots
+        </span> 
+    </div>
+    <div *ngFor="let book of objectkeys(booked);let in=index">
+        <div *ngIf="book==='customer_name'" class="row contentStyle">
+            <strong>{{book.replace('_', ' ') | titlecase }} :</strong> {{booked[book]}}
+        </div>
+        <div *ngIf="book==='slot_date'" class="row contentStyle">
+            <strong>{{book.replace('_', ' ') | titlecase }} :</strong> {{booked[book] | date: 'yyyy-MM-dd'}}
+        </div>
+        <div *ngIf="book==='time_slot'" class="row contentStyle">
+            <strong>{{book.replace('_', ' ') | titlecase }} :</strong> {{booked[book]}}
+        </div>
+        <div *ngIf="book==='car_type'" class="row contentStyle">
+            <strong>{{book.replace('_', ' ') | titlecase }} :</strong> {{booked[book]}}
+        </div>
+        <div *ngIf="book==='slot_status'" class="row contentStyle">
+            <strong>{{book.replace('_', ' ') | titlecase }} :</strong> {{booked[book]}}
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-link btnStyle" (click)="updateCustomerData(booked)" title="Edit customer details"><i class="fal fa-edit"></i></button>
+        <button class="btn btn-link btnStyle1" (click)="deleteCustomerData(booked)" title="Delete customer details"><i class="fal fa-trash"></i></button>
+    </div>
+</div>

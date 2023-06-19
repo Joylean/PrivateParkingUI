@@ -8,6 +8,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ObjconversionPipe } from './objconversion.pipe';
+import { ObjcarconversionPipe } from './objcarconversion.pipe';
+import { DateconversionPipe } from './dateconversion.pipe';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from "@angular/material/sort";
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -34,6 +40,9 @@ import { CustomerHomeChildComponent } from './customer/customer-home-child/custo
     CustomerHomeComponent,
     ManageBookedSlotsComponent,
     CustomerHomeChildComponent,
+    ObjconversionPipe,
+    ObjcarconversionPipe,
+    DateconversionPipe,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +52,9 @@ import { CustomerHomeChildComponent } from './customer/customer-home-child/custo
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSortModule,
     NgMultiSelectDropDownModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,

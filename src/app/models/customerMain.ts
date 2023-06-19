@@ -1,5 +1,5 @@
-export interface Customer {
-    // id: number;
+export interface CustomerMain {
+    id: number;
     customer_name: string;
     slot_date: Date;
     time_slot: string;
