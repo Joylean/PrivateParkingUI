@@ -97,6 +97,13 @@ export class HomeComponent implements OnInit {
       // console.log(simpleDate);
 
       //Prefilling fields
+      
+      this.selectedItems=this.dataSend.time_slots_available["data"];
+      this.selectedCars=this.dataSend.car_type["data"];
+      this.dateNew=simpleDate;
+      // console.log(this.adminForm.value);
+
+      this.adminForm.get('name')?.disable();
       this.adminForm.patchValue({
         name: this.dataSend.admin_name,
         date: simpleDate,
@@ -106,10 +113,6 @@ export class HomeComponent implements OnInit {
         number_of_slots: this.dataSend.number_of_slots,
         cancel: this.dataSend.cancellation_fee,
       })
-      this.selectedItems=this.dataSend.time_slots_available["data"];
-      this.selectedCars=this.dataSend.car_type["data"];
-      this.dateNew=simpleDate;
-      // console.log(this.adminForm.value);
     }
   }
 
@@ -148,7 +151,7 @@ export class HomeComponent implements OnInit {
 
   submitUpdateAdminForm(){
     // console.warn(this.adminForm.value);
-    this.addAdminData.admin_name=this.adminForm.value.name;
+    this.addAdminData.admin_name=this.dataSend.admin_name;
     this.addAdminData.slot_date=this.adminForm.value.date;
     this.addAdminData.time_slots_available={"data":this.adminForm.value.time_slots_available};
     this.addAdminData.car_type={"data":this.adminForm.value.car_type};

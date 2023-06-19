@@ -72,7 +72,9 @@ export class ManageReservationsComponent implements OnInit {
     this.adminService.deleteAdmin(sendId).subscribe({
       next: () =>{
         this.toastr.warning('Successfully deleted the slot !', 'Deleted!');
-        // location.reload();
+        setTimeout(()=>{
+          location.reload();
+        }, 3000);
       },
       error: (response) => {
         console.log(response);

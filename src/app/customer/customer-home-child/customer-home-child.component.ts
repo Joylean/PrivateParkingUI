@@ -194,17 +194,17 @@ export class CustomerHomeChildComponent implements OnInit {
   }
 
   submitUpdateCustomerForm(){
-    this.addCustomerData.customer_name=this.dataSentToUpdateCustomerForm.customer_name;
     this.addCustomerData.slot_date=this.dateNew;
     this.addCustomerData.time_slot=this.customerForm.value.time_slot[0].item_text;
     this.addCustomerData.car_type=this.customerForm.value.car_type[0].car_text;
     this.addCustomerData.slot_status=this.customerForm.value.slot_status[0].item_text;
     if(this.dataSendToCustomerForm){
       this.addCustomerData.admin_id=this.dataSendToCustomerForm["id"];
+      this.addCustomerData.customer_name=this.customerForm.value.name;
     }else{
+      this.addCustomerData.customer_name=this.dataSentToUpdateCustomerForm.customer_name;
       this.addCustomerData.admin_id=this.dataSentToUpdateCustomerForm.admin_id;
     }
-    console.log(this.addCustomerData);
   }
 
   dateValidator(control: AbstractControl){ 

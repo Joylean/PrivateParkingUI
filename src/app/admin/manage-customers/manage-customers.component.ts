@@ -28,7 +28,7 @@ export class ManageCustomersComponent implements OnInit {
 
   constructor(
     private customerService:CustomerService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +68,9 @@ export class ManageCustomersComponent implements OnInit {
     this.customerService.deleteCustomer(sendId).subscribe({
       next: () =>{
         this.toastr.warning('Successfully deleted the booking !', 'Deleted!');
+        setTimeout(()=>{
+          location.reload();
+        }, 3000);
       },
       error: (response) => {
         console.log(response);

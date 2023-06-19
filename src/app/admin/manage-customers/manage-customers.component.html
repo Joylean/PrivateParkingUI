@@ -3,7 +3,7 @@
 <div *ngFor="let booked of objectvalues(myBookedDetails);let i=index" class="card">
     <div class="card-head">
         <span class="headingStyle"> 
-            Booked slots
+            Customer Booking {{i+1}}
         </span> 
     </div>
     <div *ngFor="let book of objectkeys(booked);let in=index">

@@ -39,7 +39,6 @@ export class ManageBookedSlotsComponent implements OnInit {
     this.customerService.getAllCustomerDetails().subscribe({
       next: (allCustomers) => {
         this.getData = allCustomers;
-        // console.log(this.getData);
         for (var k in allCustomers) {
           let allCusts=allCustomers[k];
           if (allCusts.customer_name === this.myName && allCusts.customer_name !== "") {
@@ -68,7 +67,9 @@ export class ManageBookedSlotsComponent implements OnInit {
     this.customerService.deleteCustomer(sendId).subscribe({
       next: () =>{
         this.toastr.warning('Successfully deleted the booking !', 'Deleted!');
-        // location.reload();
+        setTimeout(()=>{
+          location.reload();
+        }, 3000);
       },
       error: (response) => {
         console.log(response);
