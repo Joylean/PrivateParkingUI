@@ -1,0 +1,13 @@
+input.ng-touched.ng-invalid {
+    border: 1px solid red;
+}
+
+@media screen and (max-width: 767px) {
+    .formstyle {
+        width: 100%;
+    }
+}
+
+.information{
+    color: crimson;
+}

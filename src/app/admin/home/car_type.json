@@ -1,0 +1,11 @@
+[
+    { "car_id": 1, "car_text": "Heavy vehicles" },
+    { "car_id": 2, "car_text": "Cars"},
+    { "car_id": 3, "car_text": "Cars SUV model" },
+    { "car_id": 4, "car_text": "Minivan"},
+    { "car_id": 5, "car_text": "Residential Owner Cars"},
+    { "car_id": 6, "car_text": "Disabled People only"},
+    { "car_id": 7, "car_text": "Car with shades"},
+    { "car_id": 8, "car_text": "Modified cars"},
+    { "car_id": 9, "car_text": "Luxury cars"}
+]

@@ -1,1 +1,54 @@
-<p>manage-reservations works!</p>
+
+<app-home *ngIf="UpdateButtonClicked" [dataSend]="sendData" (onSendBack)="success($event)"></app-home>
+
+
+<div *ngFor="let adde of objectvalues(myadminData);let i=index" class="card">
+    <div class="card-head">
+        <span class="headingStyle"> 
+            Slot {{i+1}} Details
+        </span> 
+    </div>
+    <div *ngFor="let dat of objectkeys(adde);let in=index">
+        <!-- //Reactive form -->
+        <div *ngIf="dat!=='time_slots_available'">
+            <div *ngIf="dat!=='car_type'">
+                <div *ngIf="dat!=='slot_date'">
+                    <div *ngIf="dat!=='id'" class="row contentStyle">
+                        <strong>{{dat.replace('_', ' ') | titlecase }} :</strong> {{adde[dat]}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="dat ==='time_slots_available'" class="row contentStyle">
+            <strong>{{dat.replace('_', ' ') | titlecase}} :</strong><br/>
+            <span *ngFor="let val of objectvalues(adde[dat])">
+                <span *ngFor="let details of objectvalues(val)">
+                    <span *ngFor="let detail of objectvalues(details);let idx=index" >
+                        <span *ngIf="idx===1">
+                            {{detail}}<br/>
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </div>
+        <div *ngIf="dat ==='car_type'" class="row contentStyle">
+            <strong>{{dat.replace('_', ' ') | titlecase}} :</strong><br/>
+            <span *ngFor="let val of objectvalues(adde[dat])">
+                <span *ngFor="let details of objectvalues(val);">
+                    <span *ngFor="let detail of objectvalues(details);let idx=index" >
+                        <span *ngIf="idx===1">
+                            {{detail}}<br/>
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </div>
+        <div *ngIf="dat ==='slot_date'" class="row contentStyle">
+            <strong>{{dat.replace('_', ' ') | titlecase}} :</strong> {{adde[dat] | date: 'yyyy-MM-dd'}}
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-link btnStyle" (click)="updateAdminData(adde)" title="Edit admin details"><i class="fal fa-edit"></i></button>
+        <button class="btn btn-link btnStyle1" (click)="deleteAdminData(adde)" title="Delete admin details"><i class="fal fa-trash"></i></button>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<!-- Create the form to book a parking spot here -->
+
+<div class="card">
+    <div *ngIf="!updateSlot" class="card-head">
+        <h3>Book Slot</h3>
+    </div>
+    <div *ngIf="updateSlot" class="card-head">
+        <h3>Update existing slot</h3>
+    </div>
+    <div class="card-body">
+            <div class="row">
+                <div class="col col-md-6 formstyle" style="overflow-y: scroll; max-height: 100vh">
+                    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name *</label><br/>
+                        <input id="name" type="text" class="form-control" formControlName="name" [disabled]="updateSlot" placeholder="Enter your name">
+                        <div *ngIf="customerForm.controls['name'].invalid && (customerForm.controls['name'].dirty || customerForm.controls['name'].touched)" class="alert alert-danger">
+                            <div *ngIf="customerForm.controls['name'].errors?.['required']">Name is required.</div>
+                            <div *ngIf="customerForm.controls['name'].errors?.['minlength']">Name should be at least 2 characters long.</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="time_slot">Select Slots *</label><br/>
+                        <ng-multiselect-dropdown formControlName="time_slot" [placeholder]="'Select the time slot to book'" [disabled]="updateSlot" [settings]="dropdownSettings" [data]="dropdownList"
+                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                        </ng-multiselect-dropdown>
+
+                        <div *ngIf="customerForm.controls['time_slot'].invalid && customerForm.controls['time_slot'].touched" class="alert alert-danger">
+                            <div *ngIf="customerForm.controls['time_slot'].errors?.['required']">This field should not be empty</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="car_type">Type of cars/ vehicles *</label><br/>
+                        <ng-multiselect-dropdown formControlName="car_type" [placeholder]="'Select your car type'" [disabled]="updateSlot" [settings]="dropdownSettingsCar" [data]="dropdownListCars"
+                            [(ngModel)]="selectedCars" (onSelect)="onItemSelectCar($event)" (onSelectAll)="onSelectAllCar($event)">
+                        </ng-multiselect-dropdown>
+
+                        <div *ngIf="customerForm.controls['car_type'].invalid && customerForm.controls['car_type'].touched" class="alert alert-danger">
+                            <div *ngIf="customerForm.controls['car_type'].errors?.['required']">This field should not be empty</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="slot_status">Select Status *</label><br/>
+                        <ng-multiselect-dropdown formControlName="slot_status" [placeholder]="'Select your status'" [settings]="dropdownSettingsStatus" [data]="dropdownListStatus"
+                            [(ngModel)]="selectedStatus" [disabled]="!updateSlot" (onSelect)="onItemSelectStatus($event)" (onSelectAll)="onSelectAllStatus($event)">
+                        </ng-multiselect-dropdown>
+
+                        <div *ngIf="customerForm.controls['slot_status'].invalid && customerForm.controls['slot_status'].touched" class="alert alert-danger">
+                            <div *ngIf="customerForm.controls['slot_status'].errors?.['required']">This field should not be empty</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date">Date *</label><br/>
+                        <input formControlName="date" id="date" type="date" class="form-control" [(ngModel)]="dateNew" placeholder="Add Date"/>
+                        <div *ngIf="customerForm.controls['date'].invalid && (customerForm.controls['date'].dirty || customerForm.controls['date'].touched)" class="alert alert-danger">
+                            <div *ngIf="customerForm.controls['date'].errors?.['invalidDate']">You cannot choose a past date</div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div *ngIf="!updateSlot" class="mb-3">
+                        <strong class="information">Price :</strong> {{amountToPay[1]}}
+                    </div>
+                    <div *ngIf="!updateSlot" class="mb-3">
+                        <strong class="information">Cancellation Fee :</strong> {{amountToPay[0]}}
+                    </div>
+                    <br/>
+                    <div *ngIf="!updateSlot" class="mb-3">
+                        <button type="submit" [disabled]="!customerForm.valid" class="btn btn-primary">Submit</button>&nbsp;
+                    </div>
+                    <div *ngIf="updateSlot" class="mb-3">
+                        <button type="button" (click)="onUpdate()" class="btn btn-primary">Update</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>

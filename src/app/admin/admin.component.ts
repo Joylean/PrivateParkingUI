@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-admin',
@@ -10,14 +8,12 @@ import { environment } from '../../environments/environment';
 
 export class AdminComponent implements OnInit {
 
-  public admin:any;
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 
-  constructor(private httpClient:HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getAdmin();
   }
 
   getBodyClass(): string{
@@ -29,14 +25,4 @@ export class AdminComponent implements OnInit {
     }
     return styleClass;
   }
-
-  getAdmin() {
-    this.httpClient.get<any>(environment.apiUrl+"/api/admin").subscribe(
-      response=>{
-        console.log(response);
-        this.admin=response;
-      }
-    )
-  }
-
 }

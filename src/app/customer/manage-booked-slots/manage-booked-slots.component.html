@@ -1,9 +1,10 @@
 <app-customer-home-child *ngIf="UpdateButtonClicked" [dataSentToUpdateCustomerForm]="sendCustData" (onSendBack)="success($event)"></app-customer-home-child>
 
+
 <div *ngFor="let booked of objectvalues(myBookedDetails);let i=index" class="card">
     <div class="card-head">
         <span class="headingStyle"> 
-            Customer Booking {{i+1}}
+            Booked slots
         </span> 
     </div>
     <div *ngFor="let book of objectkeys(booked);let in=index">
@@ -28,3 +29,4 @@
         <button class="btn btn-link btnStyle1" (click)="deleteCustomerData(booked)" title="Delete customer details"><i class="fal fa-trash"></i></button>
     </div>
 </div>
+

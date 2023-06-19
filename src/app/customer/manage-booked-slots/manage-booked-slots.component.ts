@@ -4,11 +4,11 @@ import { CustomerService } from 'app/services/customer.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-manage-customers',
-  templateUrl: './manage-customers.component.html',
-  styleUrls: ['./manage-customers.component.css']
+  selector: 'app-manage-booked-slots',
+  templateUrl: './manage-booked-slots.component.html',
+  styleUrls: ['./manage-booked-slots.component.css']
 })
-export class ManageCustomersComponent implements OnInit {
+export class ManageBookedSlotsComponent implements OnInit {
 
   getData:any;
   myName:string="";
@@ -25,13 +25,11 @@ export class ManageCustomersComponent implements OnInit {
     slot_status:"",
     admin_id:0
   }
-
-  constructor(
-    private customerService:CustomerService,
-    private toastr:ToastrService,
-  ) { }
+  constructor(private customerService:CustomerService,
+    private toastr:ToastrService) { }
 
   ngOnInit(): void {
+    this.myName="Sammy";
     this.get_Customers();
     this.objectvalues=Object.values;
     this.objectkeys=Object.keys;
@@ -41,11 +39,12 @@ export class ManageCustomersComponent implements OnInit {
     this.customerService.getAllCustomerDetails().subscribe({
       next: (allCustomers) => {
         this.getData = allCustomers;
-        // console.log(this.getData);
         for (var k in allCustomers) {
-          this.myBookedDetails.push(allCustomers[k]);
+          let allCusts=allCustomers[k];
+          if (allCusts.customer_name === this.myName && allCusts.customer_name !== "") {
+            this.myBookedDetails.push(allCustomers[k]);
+          }
         }
-        // console.log(this.myBookedDetails);
       },
       error: (response) => {
         console.log(response);
@@ -77,4 +76,5 @@ export class ManageCustomersComponent implements OnInit {
       }
     })
   }
+
 }

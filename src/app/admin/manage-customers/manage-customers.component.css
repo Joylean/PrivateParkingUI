@@ -1,0 +1,26 @@
+.contentStyle{
+    margin: 1rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
+.leftmargin{
+    margin-left: 20%;
+}
+.card{
+    /* flex-direction: row; */
+    width: fit-content;
+    display: inline-flex; /* or can use "inline-grid" */
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+.btnStyle{
+    float: right;
+    color: darkcyan;
+}
+.btnStyle1{
+    float: right;
+    color: crimson;
+}
+.headingStyle{
+    font-size:20px;
+    color: darkcyan;
+}
