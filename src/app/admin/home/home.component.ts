@@ -150,15 +150,18 @@ export class HomeComponent implements OnInit {
   }
 
   submitUpdateAdminForm(){
-    // console.warn(this.adminForm.value);
-    this.addAdminData.admin_name=this.dataSend.admin_name;
+    if(this.dataSend){
+      this.addAdminData.admin_name=this.dataSend.admin_name;
+    }else{
+      this.addAdminData.admin_name=this.adminForm.value.name;
+    }
     this.addAdminData.slot_date=this.adminForm.value.date;
     this.addAdminData.time_slots_available={"data":this.adminForm.value.time_slots_available};
     this.addAdminData.car_type={"data":this.adminForm.value.car_type};
     this.addAdminData.price=this.adminForm.value.price;
     this.addAdminData.number_of_slots=this.adminForm.value.number_of_slots;
     this.addAdminData.cancellation_fee=this.adminForm.value.cancel;
-    // console.log(this.addAdminData);
+    console.log(this.dataSend);
   }
 
   dateValidator(control: AbstractControl){ 

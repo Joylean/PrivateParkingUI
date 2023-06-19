@@ -17,7 +17,7 @@ interface SideNavToggleCust{
 })
 export class AppComponent {
   title = 'PrivateParkingUI';
-  admin:Boolean = false; //change this value to open admin page and customer page
+  admin:Boolean = true; //change this value to open admin page and customer page
 
   isSideNavCollapsed=false;
   screenWidth=0;
